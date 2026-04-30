@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Phone Manager' %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <h1 class="logo">📱 Phone Manager</h1>
+      <ul class="nav-links">
+        <% if (typeof user !== 'undefined' && user) { %>
+          <li><a href="/phones">Phones</a></li>
+          <li class="user-info">
+            <span>Welcome, <strong><%= user.name %></strong></span>
+            <a href="/logout" class="btn-logout">Logout</a>
+          </li>
+        <% } else { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <% if (typeof message !== 'undefined' && message) { %>
+      <div class="alert alert-info"><%= message %></div>
+    <% } %>
+
+    <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+      <div class="alert alert-danger">
+        <ul>
+          <% errors.forEach(error => { %>
+            <li><%= error %></li>
+          <% }); %>
+        </ul>
+      </div>
+    <% } %>
+
+    <%- body %>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Phone Manager. All rights reserved.</p>
+  </footer>
+</body>
+</html>

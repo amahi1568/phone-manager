@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Phone</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <h1 class="logo">📱 Phone Manager</h1>
+      <ul class="nav-links">
+        <li><a href="/phones">My Phones</a></li>
+        <li class="user-info">
+          <span>Welcome, <strong><%= user.name %></strong></span>
+          <a href="/logout" class="btn-logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="form-container">
+      <h1>Add New Phone</h1>
+
+      <% if (errors && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          <ul>
+            <% errors.forEach(error => { %>
+              <li><%= error %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form method="POST" action="/phones">
+        <div class="form-group">
+          <label for="phoneName">Phone Name *</label>
+          <input type="text" id="phoneName" name="phoneName" required placeholder="e.g., iPhone 15 Pro">
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price (Rs) *</label>
+          <input type="number" id="price" name="price" required placeholder="e.g., 99999">
+        </div>
+
+        <div class="form-group">
+          <label for="isIOS">
+            <input type="checkbox" id="isIOS" name="isIOS" value="true">
+            Is this an iOS device?
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Add Phone</button>
+          <a href="/phones" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Phone Manager. All rights reserved.</p>
+  </footer>
+</body>
+</html>

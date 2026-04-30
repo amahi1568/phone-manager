@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Details</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <h1 class="logo">📱 Phone Manager</h1>
+      <ul class="nav-links">
+        <li><a href="/phones">My Phones</a></li>
+        <li class="user-info">
+          <span>Welcome, <strong><%= user.name %></strong></span>
+          <a href="/logout" class="btn-logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="phone-detail">
+      <h1><%= phone.phoneName %></h1>
+      
+      <div class="detail-card">
+        <div class="detail-row">
+          <strong>Phone Name:</strong>
+          <span><%= phone.phoneName %></span>
+        </div>
+        <div class="detail-row">
+          <strong>Price:</strong>
+          <span>💰 <%= phone.price %> Rs</span>
+        </div>
+        <div class="detail-row">
+          <strong>Operating System:</strong>
+          <span>
+            <% if (phone.isIOS) { %>
+              🍎 iOS
+            <% } else { %>
+              🤖 Android
+            <% } %>
+          </span>
+        </div>
+        <div class="detail-row">
+          <strong>Added On:</strong>
+          <span><%= new Date(phone.createdAt).toLocaleDateString() %></span>
+        </div>
+      </div>
+
+      <div class="detail-actions">
+        <a href="/phones" class="btn btn-secondary">Back to Phones</a>
+        <form method="POST" action="/phones/<%= phone._id %>/delete" style="display:inline;">
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this phone?')">Delete Phone</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Phone Manager. All rights reserved.</p>
+  </footer>
+</body>
+</html>

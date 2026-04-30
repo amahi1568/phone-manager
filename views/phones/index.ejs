@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Phones</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <h1 class="logo">📱 Phone Manager</h1>
+      <ul class="nav-links">
+        <li><a href="/phones">My Phones</a></li>
+        <li><a href="/phones/new" class="btn-add">➕ Add Phone</a></li>
+        <li class="user-info">
+          <span>Welcome, <strong><%= user.name %></strong></span>
+          <a href="/logout" class="btn-logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>My Phones</h1>
+
+    <% if (phones.length === 0) { %>
+      <div class="empty-state">
+        <p>No phones added yet. <a href="/phones/new">Add your first phone</a></p>
+      </div>
+    <% } else { %>
+      <div class="phones-grid">
+        <% phones.forEach(phone => { %>
+          <div class="phone-card">
+            <div class="phone-header">
+              <h3><%= phone.phoneName %></h3>
+              <% if (phone.isIOS) { %>
+                <span class="badge badge-ios">iOS</span>
+              <% } else { %>
+                <span class="badge badge-android">Android</span>
+              <% } %>
+            </div>
+            <div class="phone-body">
+              <p class="price">💰 <%= phone.price %> Rs</p>
+              <p class="created">Added: <%= new Date(phone.createdAt).toLocaleDateString() %></p>
+            </div>
+            <div class="phone-actions">
+              <a href="/phones/<%= phone._id %>" class="btn btn-sm btn-info">View</a>
+              <form method="POST" action="/phones/<%= phone._id %>/delete" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+              </form>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Phone Manager. All rights reserved.</p>
+  </footer>
+</body>
+</html>
